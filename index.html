@@ -72,7 +72,7 @@
 
 <script>
   /* ================= AYARLAR ================= */
-  const ISIM = "Beyza";
+  const ISIM = "Beyzam";
   // Cevapları WhatsApp'tan sana göndersin istiyorsan numaranı yaz (başında 90, boşluksuz). Örn: "905551234567"
   const TELEFON = "905318675873";
 
@@ -88,7 +88,7 @@
     { anahtar: "ne", ozet: "Plan", etiket: "3 / 4", baslik: "Ne yapalım?", alt: "burası sendeee",
       secenekler: [{ m: "Kahve", n: "Yemek" }, "İyi Bir Yerde Yemek", "Gezeriz Bir Yerde Yeriz", "aşkımm gün içinde karar verelimmm", "farketmezz", "Yürüyüş"] },
     { anahtar: "yer", ozet: "Yer", etiket: "4 / 4", baslik: "Nerede olsun?", alt: "Son soru, söz.",
-      secenekler: ["Kemerburgaz tarafları", "Beylikdüzü sinema", "Sahilde yürüyüş", "Sinema+Sahilde Yürüyüş", "Kent Ormanı+Ordan Beşiktaş Sahil", "Sonra netleştiririzz sevgilimm"] }
+      secenekler: ["Kemerburgaz tarafları", "Beylikdüzü sinema", "Sahilde yürüyüş", "Sinema+Sahilde Yürüyüş", "Kent Ormanı+Ordan Beşiktaş+Ortaköy Sahil", "Sonra netleştiririzz sevgilimm"] }
   ];
 
   /* "Hayır" butonuna basınca sırayla çıkan yazılar. Sonunda buton kaybolur. */
@@ -150,9 +150,9 @@
     const satirlar = adimlar.filter(a => a.anahtar).map(a => `<li><b>${a.ozet}:</b> ${cevap[a.anahtar]}</li>`).join("");
     const metin = "Merhaba! Buluşma planım:\n" + adimlar.filter(a => a.anahtar).map(a => `• ${a.ozet}: ${cevap[a.anahtar]}`).join("\n");
     const link = `https://wa.me/${TELEFON}?text=${encodeURIComponent(metin)}`;
-    sahne.innerHTML = `<span class="etiket">Hazır</span><h1>Anlaştık, ${ISIM}!</h1><p class="alt">İşte planımız:</p>
+    sahne.innerHTML = `<span class="etiket">Hazır</span><h1>Anlaştık, ${ISIM}</h1><p class="alt">İşte planımız:</p>
       <ul class="ozet">${satirlar}</ul>
-      <div class="secenekler"><a class="btn ana" href="${link}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;font-size:1.25rem">Cevabımı gönder</a>
+      <div class="secenekler"><a class="btn ana" href="${link}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;font-size:1.25rem">Yaşarına Gönder</a>
       <button class="btn" id="bastan" type="button">Baştan seç</button></div>`;
     document.getElementById("bastan").onclick = () => { i = 1; ciz(); };
   }
