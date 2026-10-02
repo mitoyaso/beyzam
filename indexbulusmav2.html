@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5e9d7">
+  <title>Beyza için bir soru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Figtree:wght@400;500&family=Fraunces:wght@800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RENKLER (buradan değiştirebilirsin) ===== */
+    :root {
+      --zemin: #f5e9d7;
+      --yazi: #1f1a14;
+      --turuncu: #c8733a;
+      --acik-turuncu: #fbe6d6;
+      --soluk: #7a6a58;
+      --kenar: #e2d6c4;
+      --kart: #f9f4ec;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; background: var(--zemin); color: var(--yazi); font-family: "Figtree", system-ui, sans-serif; line-height: 1.5; }
+
+    main { max-width: 560px; margin: 0 auto; padding: clamp(48px, 12vh, 120px) 24px 170px; }
+    .gir { animation: gir .3s ease; }
+    @keyframes gir { from { opacity: 0; transform: translateY(8px); } }
+
+    .etiket { display: inline-block; background: var(--acik-turuncu); color: #6b3a17; padding: 6px 12px; border-radius: 999px; font-size: .875rem; }
+    h1 { font-family: "Fraunces", Georgia, serif; font-weight: 900; font-size: clamp(2rem, 8vw, 3rem); line-height: 1.05; margin: 16px 0 8px; }
+    .alt { color: var(--soluk); }
+
+    .secenekler { margin-top: 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .satir { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+    .btn { font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 1.125rem; color: var(--yazi); background: var(--kart); border: 1.5px solid var(--kenar); padding: 14px 26px; min-height: 48px; touch-action: manipulation; border-radius: 999px; cursor: pointer; transition: transform .15s, background .15s; }
+    .btn:hover { background: #fff; transform: translateY(-2px); }
+    .btn:focus-visible { outline: 3px solid var(--turuncu); outline-offset: 3px; }
+    .btn.secili { background: var(--turuncu); border-color: var(--turuncu); color: #fbeedd; }
+    .btn.ana { background: var(--turuncu); border-color: var(--turuncu); color: #fbeedd; font-size: 1.5rem; padding: 20px 44px; transform: rotate(-2deg) scale(var(--olcek, 1)); transform-origin: left center; }
+    .btn.ana:hover { background: #b7632d; }
+    .not { font-family: "Caveat", cursive; font-size: 1.375rem; color: #8a4f1f; transform: rotate(-3deg); }
+
+    .ozet { margin-top: 24px; list-style: none; display: grid; gap: 8px; }
+    .ozet b { font-family: "Fraunces", Georgia, serif; }
+
+    /* ===== ALT ÇUBUK: Geri + noktalar ===== */
+    .alt-cubuk { position: fixed; left: 0; right: 0; bottom: 0; padding: 28px 0 calc(24px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(to top, var(--zemin) 65%, rgba(245,233,215,0)); }
+    .alt-cubuk .ic { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 40px; padding: 0 24px; }
+    .geri { font-family: "Fraunces", Georgia, serif; font-weight: 800; color: #7a4318; background: none; border: 0; cursor: pointer; font-size: 1rem; }
+    .geri[hidden] { display: block; visibility: hidden; }
+    .noktalar { display: flex; gap: 10px; }
+    .nokta { width: 10px; height: 10px; border-radius: 50%; background: #d9cdbb; }
+    .nokta.gecmis { background: #f1b994; }
+    .nokta.simdiki { background: var(--turuncu); }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <main id="sahne" aria-live="polite"><p class="alt">Sayfa yükleniyor... Bu yazı kalıyorsa dosyayı Chrome veya Safari ile aç.</p></main>
+  <noscript><p style="padding:24px">Bu sayfanın çalışması için JavaScript açık olmalı. Lütfen Chrome veya Safari ile aç.</p></noscript>
+
+  <div class="alt-cubuk">
+    <div class="ic">
+      <button class="geri" id="geri" type="button">Geri</button>
+      <div class="noktalar" id="noktalar"></div>
+    </div>
+  </div>
+
+<script>
+  /* ================= AYARLAR ================= */
+  const ISIM = "Beyza";
+  // Cevapları WhatsApp'tan sana göndersin istiyorsan numaranı yaz (başında 90, boşluksuz). Örn: "905551234567"
+  const TELEFON = "905318675873";
+
+  /* ================= SORULAR =================
+     Soruları, seçenekleri, sırayı buradan değiştirebilirsin.
+     Bir seçeneğin yanında el yazısı not istersen: { m: "Kahve", n: "benim favorim" } */
+  const adimlar = [
+    { tur: "evethayir", etiket: "Önce bir soru", baslik: ISIM + ", buluşalım mı?", alt: "Tahminim var ama senden duymak istiyorum." },
+    { anahtar: "gun", ozet: "Gün", etiket: "1 / 4", baslik: "Hangi gün?", alt: "Takvimine bir bak, birini seç.",
+      secenekler: ["Cuma", "Cumartesi", "Pazar", "Hafta içi bir akşam", "Önümüzdeki hafta", "Sen söyle"] },
+    { anahtar: "saat", ozet: "Saat", etiket: "2 / 4", baslik: "Günün hangi saati?", alt: "Sabah insanı mısın, akşam mı?",
+      secenekler: ["Sabah", "Öğle", "İkindi", "Akşam", "Gece geç saat", "Fark etmez"] },
+    { anahtar: "ne", ozet: "Plan", etiket: "3 / 4", baslik: "Ne yapalım?", alt: "Aç mısın, sadece sohbet mi?",
+      secenekler: [{ m: "Kahve", n: "klasik" }, "Öğle yemeği", "Akşam yemeği", "Brunch", "Tatlı", "Yürüyüş"] },
+    { anahtar: "yer", ozet: "Yer", etiket: "4 / 4", baslik: "Nerede olsun?", alt: "Son soru, söz.",
+      secenekler: ["Mekan 1", "Mekan 2", "Mekan 3", "Mekan 4", "Mekan 5", "Sürpriz olsun"] }
+  ];
+
+  /* "Hayır" butonuna basınca sırayla çıkan yazılar. Sonunda buton kaybolur. */
+  const hayirYazilari = ["Hayır", "Emin misin?", "Bir daha düşün", "Son şansın..."];
+
+  /* ================= KOD (burayı değiştirmene gerek yok) ================= */
+  const sahne = document.getElementById("sahne");
+  const noktalar = document.getElementById("noktalar");
+  const geri = document.getElementById("geri");
+  const cevap = {};
+  let i = 0, h = 0;
+  const toplam = adimlar.length + 1;
+
+  function noktalariCiz() {
+    noktalar.innerHTML = "";
+    for (let k = 0; k < toplam; k++) {
+      const s = document.createElement("span");
+      s.className = "nokta" + (k < i ? " gecmis" : k === i ? " simdiki" : "");
+      noktalar.appendChild(s);
+    }
+    geri.hidden = i === 0;
+  }
+
+  function ciz() {
+    noktalariCiz();
+    sahne.className = "gir";
+    sahne.style.animation = "none"; sahne.offsetHeight; sahne.style.animation = "";
+
+    if (i >= adimlar.length) return ozetiCiz();
+    const a = adimlar[i];
+    let html = `<span class="etiket">${a.etiket}</span><h1>${a.baslik}</h1><p class="alt">${a.alt}</p><div class="secenekler">`;
+
+    if (a.tur === "evethayir") {
+      html += `<div class="satir"><button class="btn ana" id="evet" type="button" style="--olcek:${1 + h * 0.12}">Evet</button><span class="not">← akıllıca seçim</span></div>`;
+      if (h < hayirYazilari.length) html += `<button class="btn" id="hayir" type="button">${hayirYazilari[h]}</button>`;
+    } else {
+      a.secenekler.forEach((o, k) => {
+        const s = typeof o === "string" ? { m: o } : o;
+        html += `<div class="satir"><button class="btn${cevap[a.anahtar] === s.m ? " secili" : ""}" data-k="${k}" type="button">${s.m}</button>${s.n ? `<span class="not">← ${s.n}</span>` : ""}</div>`;
+      });
+    }
+    sahne.innerHTML = html + "</div>";
+
+    if (a.tur === "evethayir") {
+      document.getElementById("evet").onclick = () => { i++; ciz(); };
+      const hb = document.getElementById("hayir");
+      if (hb) hb.onclick = () => { h++; ciz(); };
+    } else {
+      sahne.querySelectorAll("[data-k]").forEach(b => b.onclick = () => {
+        const o = a.secenekler[b.dataset.k];
+        cevap[a.anahtar] = typeof o === "string" ? o : o.m;
+        b.classList.add("secili");
+        setTimeout(() => { i++; ciz(); }, 250);
+      });
+    }
+  }
+
+  function ozetiCiz() {
+    const satirlar = adimlar.filter(a => a.anahtar).map(a => `<li><b>${a.ozet}:</b> ${cevap[a.anahtar]}</li>`).join("");
+    const metin = "Merhaba! Buluşma planım:\n" + adimlar.filter(a => a.anahtar).map(a => `• ${a.ozet}: ${cevap[a.anahtar]}`).join("\n");
+    const link = `https://wa.me/${TELEFON}?text=${encodeURIComponent(metin)}`;
+    sahne.innerHTML = `<span class="etiket">Hazır</span><h1>Anlaştık, ${ISIM}!</h1><p class="alt">İşte planımız:</p>
+      <ul class="ozet">${satirlar}</ul>
+      <div class="secenekler"><a class="btn ana" href="${link}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;font-size:1.25rem">Cevabımı gönder</a>
+      <button class="btn" id="bastan" type="button">Baştan seç</button></div>`;
+    document.getElementById("bastan").onclick = () => { i = 1; ciz(); };
+  }
+
+  geri.onclick = () => { if (i > 0) { i--; ciz(); } };
+  try { ciz(); } catch (e) { sahne.innerHTML = '<p class="alt">Bir hata oldu: ' + e.message + "</p>"; }
+</script>
+</body>
+</html>
