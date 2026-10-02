@@ -152,7 +152,7 @@
     const link = `https://wa.me/${TELEFON}?text=${encodeURIComponent(metin)}`;
     sahne.innerHTML = `<span class="etiket">Hazır</span><h1>Anlaştık, ${ISIM}</h1><p class="alt">İşte planımız:</p>
       <ul class="ozet">${satirlar}</ul>
-      <div class="secenekler"><a class="btn ana" href="${link}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;font-size:1.25rem">Fikirlerini Yaşarına Gönder</a>
+      <div class="secenekler"><a class="btn ana" href="${link}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;font-size:1.25rem">Fikirlerini Yaşarına Gönder (tıkla ve 2 saniye bekle)</a>
       <button class="btn" id="bastan" type="button">Baştan seç</button></div>`;
     document.getElementById("bastan").onclick = () => { i = 1; ciz(); };
   }
