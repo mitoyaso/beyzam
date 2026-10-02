@@ -148,7 +148,7 @@
 
   function ozetiCiz() {
     const satirlar = adimlar.filter(a => a.anahtar).map(a => `<li><b>${a.ozet}:</b> ${cevap[a.anahtar]}</li>`).join("");
-    const metin = "Merhaba! Buluşma planım:\n" + adimlar.filter(a => a.anahtar).map(a => `• ${a.ozet}: ${cevap[a.anahtar]}`).join("\n");
+    const metin = "Aşkımmm Yaşarımmmmm! Buluşma planım:\n" + adimlar.filter(a => a.anahtar).map(a => `• ${a.ozet}: ${cevap[a.anahtar]}`).join("\n");
     const link = `https://wa.me/${TELEFON}?text=${encodeURIComponent(metin)}`;
     sahne.innerHTML = `<span class="etiket">Hazır</span><h1>Anlaştık, ${ISIM}</h1><p class="alt">İşte planımız:</p>
       <ul class="ozet">${satirlar}</ul>
